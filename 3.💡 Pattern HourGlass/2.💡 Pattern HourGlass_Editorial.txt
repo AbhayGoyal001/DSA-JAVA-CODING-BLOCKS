@@ -1,0 +1,89 @@
+In Pattern Question, there is a common method which we teach in course viz, taking nsp, nst, csp, cst and row variables.
+
+Pattern Hack: Always first Try to first print pattern by ignoring the value to be printed then accommodate your value in that pattern. For e.g.,
+
+                      5 4 3 2 1 0 1 2 3 4 5
+                        4 3 2 1 0 1 2 3 4 
+                          3 2 1 0 1 2 3 
+                            2 1 0 1 2 
+                              1 0 1 
+                                0 
+                              1 0 1 
+                            2 1 0 1 2 
+                          3 2 1 0 1 2 3 
+                        4 3 2 1 0 1 2 3 4 
+                      5 4 3 2 1 0 1 2 3 4 5
+View it as:-
+
+                      * * * * * * * * * * *
+                        * * * * * * * * * 
+                          * * * * * * * 
+                            * * * * * 
+                              * * * 
+                                * 
+                              * * * 
+                            * * * * * 
+                          * * * * * * * 
+                        * * * * * * * * * 
+                      * * * * * * * * * * *
+Short Info about the variables:-
+
+
+1. nsp (number of spaces)-> Number of spaces in very First Line of the pattern.
+2. nst (number of stars)-> Number of stars in very first line of the pattern.
+3. csp (counter of spaces)-> counter of spaces that will print the required number of spaces and will be initialized with 1 and incremented upto nsp.
+4. cst (counter of stars)->  counter of spaces that will print the required number of stars and will be initialized with 1 and incremented upto nst.
+5. rows -> It will be initialized with 1 and will go upto the total number of rows in the pattern.
+Given pattern is seen as first spaces and then numbers.The numbers are first in in decreasing order and then in increasing order in a row. Spaces first increases and then decreases in a row. So do the work of spaces first and then that of numbers.And then change variables accordingly for next iterations.
+
+Code:
+
+
+import java.util.Scanner;
+public class patternhb {
+
+
+    public static void main(String[] args) {
+
+        Scanner scn = new Scanner(System.in) ;
+
+        int n = scn.nextInt();
+
+        int rows = 2 * n + 1;     //number of rows
+
+        int nst = 2 * n + 1;      //initializing number of numbers
+        int nsp = 0;             //initializing number of spaces   
+        for (int row = 1; row <= rows; row++) {
+            int val;
+            if (row <= n + 1) // for  first n + 1 numbers val is n - row + 1
+                val = n - row + 1;
+            else
+                val = row - n - 1; // for rest numbers val is row - n - 1
+
+         //work for spaces
+            for (int csp = 1; csp <= nsp; csp++) {
+                System.out.print("  ");
+            }
+
+        //work for numbers
+        //Till n numbers are in decreasing order and then in increasing order
+            for (int cst = 1; cst <= nst; cst++) {
+                System.out.print(val + " ");
+                if (cst <= nst / 2)
+                    val--;
+                else
+                    val++;
+            }
+         // preparation for next iteration
+            if (row <= n) {
+                nsp++;
+                nst -= 2;
+            } else {
+                nsp--;
+                nst += 2;
+            }
+            System.out.println();
+        }
+    }
+
+}
