@@ -1,0 +1,49 @@
+Simply Put a loop and take input operator and then take input of two digits and then perform the operation till the user inputs 'x' or 'X'.
+
+Code
+
+
+import java.util.Scanner;
+public class main{
+   static Scanner scn=new Scanner(System.in);
+    public static void main(String[] args) {
+        char ch;
+        do {
+            ch = scn.next().charAt(0);  // Use cin in case of c++
+            if (ch == '+' || ch == '-' || ch == ' * ' || ch == '/' || ch == '%') {
+                operation(ch);
+            } else {
+                if (ch != 'x' && ch != 'X')
+                    System.out.println("Invalid operation. Try again.");
+            }
+        } while (ch != 'x' && ch != 'X');
+    }
+    public static void operation(char ch) {
+        int a = scn.nextInt(); // Use cin in case of c++
+        int b = scn.nextInt(); // Use cin in case of c++
+        int res = 0;
+        switch (ch) {
+        case '+': {
+            res = a + b;
+            break;
+        }
+        case '-': {
+            res = a - b;
+            break;
+        }
+        case '*': {
+            res = a * b;
+            break;
+        }
+        case '/': {
+            res = a / b;
+            break;
+        }
+        case '%': {
+            res = a % b;
+            break;
+        }
+        }
+        System.out.println(res);
+    }
+}
