@@ -1,0 +1,23 @@
+Any number which has only two divisors, one divisor is the number itself and other divisor is 1, is called as Prime number.
+
+
+Algorithmn
+
+Take input of the number.
+put a loop from 2 to that number.
+If the number gets divided by any number in the loop, that means the number is not Prime.
+Othewise, Prime.
+Code
+
+
+public static boolean isPrime(int n) {
+
+        if (n <= 1)
+            return false;
+
+        for (int i = 2; i < n; i++)
+            if (n % i == 0)
+                return false;
+
+        return true;
+}
