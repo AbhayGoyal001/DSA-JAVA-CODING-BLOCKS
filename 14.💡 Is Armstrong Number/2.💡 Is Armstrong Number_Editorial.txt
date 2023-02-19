@@ -1,0 +1,93 @@
+Algorithm
+
+Take input of number.
+Calculate the number of digits of the number in a variable say , cnt.
+Extract digit one by one from the number(using % 10).
+Raise it to the power of number of digits and add it to sum.
+After the loop check if the sum is equal to the original number.
+     1.If yes, print true
+     2.otherwise, print false.
+Code
+
+
+//C++ Code
+int fastPow(int a, int b)
+{
+    if(b==0)
+        return a;
+
+    int smallAns = fastPow(a, b/2);
+    smallAns *= smallAns;
+    if(b & 1)
+         return smallAns*a;
+
+     return smallAns;
+}
+bool isArmstrong(int n)
+{
+    int noOfDigits = 0;
+    int m = n;
+    while (m)
+    {
+        noOfDigits++;
+        m /= 10;
+    }
+
+    m = n;
+    int sum = 0;
+    while (m)
+    {
+        int r = m % 10;
+        sum += fastPow(r, noOfDigits);
+        m /= 10;
+    }
+
+    return n == sum;
+}
+
+
+//Java Code
+public static void printAllArmstrongs(int ll,int ul){
+
+       for(int i=ll;i<=ul;i++) {
+
+           int digits=numberOfDigits(i);
+           boolean ans=isArmstrong(i,digits);
+           if(ans)
+               System.out.println(i);
+       }
+}
+
+public static boolean isArmstrong(int num,int nod){
+
+        int sum=0;
+
+        int temp=num;
+
+        while(num!=0){
+
+            int rem=num%10;
+
+            int p=1;
+            for(int i=1;i<=nod;i++)
+                p=p*rem;
+            sum+=p;
+
+            num/=10;
+        }
+        if(sum==temp)
+            return true;
+        else
+            return false;
+}
+
+public static int numberOfDigits(int num){
+
+        int count=0;
+        while(num!=0){
+          num=num/10;
+          count++;
+
+        }
+        return count;
+}
