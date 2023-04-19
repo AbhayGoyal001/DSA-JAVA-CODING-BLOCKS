@@ -1,0 +1,114 @@
+Lang - Java
+This Question is Quite Interesting to read as there remains lots of confusion while reading it. This is because of the amount of data provided in the question is a lot. Every student found himself stuck in the data provided in the question.
+
+Let's make it a simple one, for this first i need to make sure you are full aware while reading the solution for which i want to give u an example of what exactly we are going to do in this Question.
+
+Example : Suppose you are buying Maggie packet and the shopkeeper has 2 types of packets available which are as follows :- 1 kg 500 Rs and 0.5 Kg 240 Rs and your need is to buy 1 Kg Maggie so in this case obviouly you will buy 2 Half Kgs packets as it will cost 480 Rs and 1 Kg is of 500 Rs …. I know you all have made this calculation . :-]
+
+Same we are going to implement in this Question.
+
+c1 - Ticket cost for 1 ride on rickshaw or cab.
+c2 - Ticket cost for unlimited rides on some rickshaw or cabs.
+
+Now if you have 2 cabs and if you have only these 2 types of tickets available then obviously just like the above example you will first check the cost of buying Two c1 tickets and cost of 1 c2 Ticket. Among them the minimum cost willl be your answer. Now consider 1 more ticket which says c3 is the cost of ride on all rickshaws or on all cabs. then obviously now you will check the minimum cost of buying individual c1 ticket for each ride or c2 ticket for some rickshaw or on some cabs or c3 ticket for all rickshaws or all cabs.
+
+Now assume there is 1 more ticket saying unlimited cost for ride on all rickshaws and all cabs. Here your final answer will be the minimum cost of previously calculated cost using c1, c2 and c3 tickets and cost of c4 ticket.
+
+
+public class HelpRamu {
+
+    public static void main(String[] args) {
+
+        Scanner scn = new Scanner(System.in);
+
+        int tc = scn.nextInt();
+
+        while (tc > 0) {
+            int c1 = scn.nextInt();
+            int c2 = scn.nextInt();
+            int c3 = scn.nextInt();
+            int c4 = scn.nextInt();
+
+            int nor = scn.nextInt();
+            int noc = scn.nextInt();
+
+            int[] freqr = new int[nor];
+            int[] freqc = new int[noc];
+
+            for (int i = 0; i < freqr.length; i++) {
+                freqr[i] = scn.nextInt();
+            }
+
+            for (int i = 0; i < freqc.length; i++) {
+                freqc[i] = scn.nextInt();
+            }
+
+            System.out.println(minAmount(c1, c2, c3, c4, freqr, freqc));
+            tc--;
+        }
+
+    }
+
+    private static int minAmount(int c1, int c2, int c3, int c4, int[] freqr, int[] freqc) {
+
+        int rickshawMinFare = minVehicle(c1, c2, c3, freqr);
+        int carsMinFare = minVehicle(c1, c2, c3, freqc);
+
+        return Math.min(rickshawMinFare + carsMinFare, c4);
+
+    }
+
+    public static int minVehicle(int c1, int c2, int c3, int[] freq) {
+
+        int sum = 0;
+
+        for (int i = 0; i < freq.length; i++) {
+            sum += Math.min(freq[i] * c1, c2);
+        }
+
+        return Math.min(sum, c3);
+
+    }
+
+}
+
+
+Lang - Cpp
+Code for the problem is :
+
+
+#include <iostream>
+using namespace std;
+int main ()
+{
+    int testcase;
+    cin >> testcase;
+    int c1, c2, c3, c4, n, m;
+    int i;
+    int rick[1005], cab[1005];
+    while (testcase--)
+    {
+        cin >> c1 >> c2 >> c3 >> c4;
+        cin >> n >> m;
+        for (i = 0; i < n; i++)
+            cin >> rick[i];
+        for (i = 0; i < m; i++)
+            cin >> cab[i];
+
+        int costr = 0, costc = 0, min_cost;
+        for (i = 0; i < n; i++)
+            costr += min(c1*rick[i], c2);
+
+        costr = min(costr, c3);
+
+        for (i = 0; i < m; i++)
+            costc += min(c1*cab[i], c2);
+
+        costc = min(costc, c3);
+        int cost;
+        cost = costc + costr;
+        min_cost = min(c4, cost);
+        cout << min_cost << endl;
+    }
+    return 0;
+}
