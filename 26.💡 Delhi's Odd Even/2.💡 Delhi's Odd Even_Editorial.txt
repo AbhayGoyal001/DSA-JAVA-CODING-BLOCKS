@@ -1,0 +1,46 @@
+The Question in Simple language is that:
+
+You have given a number and in that number, the digits which are even should have sum divisible by 4 or the sum of digits which are odd should be divisible by the 3, Only then you can say yes otherwise you will say no.
+
+Algorithm
+
+Take input of the Number.
+Declare two variables to store the sum of even numbers and odd numbers.
+Extract digit one by one ( by % 10).
+  1.Check if the number is even or odd.
+  2.If even add the number in the variable storing even sum.
+
+  1.Othewise add it in the variable storing odd sum.
+
+After the loop, Check if the even sum is divisible by 4.
+  1.If True, print Yes.
+  2.otherwise print No.
+Check if the odd sum is divisible by 3.
+  1.If True, print Yes.
+  2.otherwise print No.
+
+Lang - Java
+
+public static void oddEven(int n){
+
+        int oddSum = 0;
+        int evenSum = 0;
+
+        while(n != 0){
+
+            int rem = n % 10;
+            if(rem % 2 == 0){
+                evenSum += rem;
+            }else{
+                oddSum += rem;
+            }
+
+            n = n/ 10;
+        }
+
+        if(evenSum % 4 == 0 || oddSum % 3 == 0){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
+    }
